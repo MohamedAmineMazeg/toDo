@@ -1,0 +1,44 @@
+{% extends "layout.html" %}
+{% from 'bootstrap5/form.html' import render_field %}
+{% block title %} Login {% endblock %} {% block register %}
+
+<div class="text-start form-body">
+  <div class="mb-4 cred-text">
+    <h2 class="">Sign in to TaskMaster</h2>
+    <span class="">Continue your journey !</span>
+  </div>
+
+  {% with messages = get_flashed_messages() %}
+  {% if messages%}
+  <div class="position-fixed top-0 end-0 p-3" style="z-index: 11">
+    {% for message in messages%}
+    <div id="liveToast" class="toast text-bg-danger d-flex" role="alert" aria-live="assertive" aria-atomic="true">
+      <div class="toast-body">
+
+        {{message}}
+
+      </div>
+      <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"
+        aria-label="Close"></button>
+    </div>
+    {% endfor %}
+  </div>
+  {%endif%}
+  {% endwith %}
+
+
+  <form action="{{url_for('login')}}" name="form" method="post" class="form registration-form">
+
+    {{render_field(form.email, form_type='inline', placeholder='Email or Username *')}}
+
+    {{render_field(form.password, form_type='inline', placeholder='Password *', novalidate=True)}}
+
+    {{render_field(form.submit)}}
+
+  </form>
+
+  <p class="login-redirect mt-3">
+    Don't have an account ? <a href="{{ url_for('register')}}">Sign up</a>
+  </p>
+</div>
+{% endblock %}

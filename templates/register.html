@@ -1,0 +1,58 @@
+{% extends "layout.html" %} 
+
+{% from 'bootstrap5/form.html' import render_field %} 
+
+{% block title %} Register {% endblock %} 
+
+{% block register %}
+<div class="container container-fluid body">
+  <div class="col-md">
+    <h1>Image here</h1>
+  </div>
+  <div class="text-start form-body col-md registration-body">
+    <div class="mb-4 cred-text">
+      <h2 class="">Sign up to TaskMaster</h2>
+      <span class="">Start your journey now !</span>
+    </div>
+
+  {% with messages = get_flashed_messages() %} 
+    {% if messages%}
+              <div class="position-fixed top-0 end-0 p-3" style="z-index: 11">
+{% for message in messages%} 
+          <div id="liveToast" class="toast text-bg-danger d-flex" role="alert" aria-live="assertive" aria-atomic="true">
+            <div class="toast-body">
+
+                {{message}} 
+
+            </div>
+            <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"aria-label="Close"></button>
+          </div>
+      {% endfor %}        
+    </div>
+
+    {% endif %} 
+  {% endwith %}
+
+    <form
+      action="{{url_for('register')}}"
+      name="form"
+      method="post"
+      class="form registration-form"
+    >
+      {{render_field(form.email, form_type='inline', placeholder='Email *')}}
+      {{render_field(form.username, form_type='inline', placeholder='Username*')}}
+       {{render_field(form.password, form_type='inline',
+      placeholder='Password *', novalidate=True)}} {{render_field(form.confirm,
+      form_type='inline', placeholder='Confirm your password *',
+      novalidate=True)}} {{render_field(form.firstName, form_type='inline',
+      placeholder='First Name')}} {{render_field(form.lastName,
+      form_type='inline', placeholder='Last Name')}}
+      {{render_field(form.submit)}}
+    </form>
+
+    <p class="login-redirect mt-3">
+      Already have an account ? <a href="{{ url_for('login')}}">Sign in</a>
+    </p>
+  </div>
+</div>
+{% endblock %}
