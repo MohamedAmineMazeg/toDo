@@ -3,6 +3,7 @@ from flask import session as sessions
 from flask_session import Session as Sessions
 from flask_login import LoginManager, login_user, login_required, logout_user
 from sqlalchemy import create_engine, select, text, or_
+import forms
 from models import Base, User, UserMixin
 from sqlalchemy.orm import sessionmaker
 from datetime import datetime
@@ -147,6 +148,12 @@ def register():
 @login_required
 def dashboard():
     return render_template('dashboard.html')
+
+@app.route('/addtask', methods=['POST', 'GET'])
+@login_required
+def add_task():
+    taskForm = forms.addtask()
+    return render_template('addTask.html', form=taskForm)
 
 @app.route('/logout', methods=["POST", "GET"])
 @login_required

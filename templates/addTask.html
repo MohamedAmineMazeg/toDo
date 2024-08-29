@@ -1,0 +1,7 @@
+{% extends 'layout.html' %}
+
+{% from 'bootstrap5/form.html' import render_field %}
+
+{%block addtask %}
+    {{render_field(form.priority)}}
+{%endblock%}
