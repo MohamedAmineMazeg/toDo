@@ -15,6 +15,7 @@ db_path = 'sqlite:///todo.db'
 
 engine = create_engine(db_path, echo=True)
 
+# initialize db
 try:
 
     Base.metadata.drop_all(bind=engine)
